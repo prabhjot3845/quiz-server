@@ -17,17 +17,7 @@ exports.registerCandidate = catchAsyncErrors(async (req, res, next) => {
       
   // const { name, email, password } = req.body;
 
-  const candidate = await Candidate.create(req.body
-    // {
-    // name,
-    // email,
-    // password,
-    // avatar: {
-    //   public_id: myCloud.public_id,
-    //   url: myCloud.secure_url,
-    // },
-  // }
-  );
+  const candidate = await Candidate.create(req.body);
   sendToken(candidate, 201, res);
 });
 
