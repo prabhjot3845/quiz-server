@@ -68,7 +68,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Get ResetPassword Token
-  const resetToken = user.getResetPasswordToken();
+  const resetToken = candidate.getResetPasswordToken();
 
   await candidate.save({ validateBeforeSave: false });
 
@@ -90,8 +90,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
       message: `Email sent to ${candidate.email} successfully`,
     });
   } catch (error) {
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
+    candidate.resetPasswordToken = undefined;
+    candidate.resetPasswordExpire = undefined;
 
     await candidate.save({ validateBeforeSave: false });
 
