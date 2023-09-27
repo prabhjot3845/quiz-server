@@ -121,7 +121,7 @@ const questionBankSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  user: {
+  candidate: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Candidate", 
   },

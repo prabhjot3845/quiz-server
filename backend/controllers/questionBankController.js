@@ -21,17 +21,17 @@ exports.createQuestionBank = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get All Product
-exports.getAllInstitutes = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 20;
-  const institutesCount = await Institute.countDocuments();
+exports.getAllQuestions = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 10;
+  const questionsCount = await QuestionBank.countDocuments();
 
-  const apiFeature = new ApiFeatures(Institute.find(), req.query)
+  const apiFeature = new ApiFeatures(QuestionBank.find(), req.query)
     .search()
     .filter();
 
-  let institutes = await apiFeature.query;
+  let questions = await apiFeature.query;
 
-  let filteredInstitutesCount = institutes.length;
+  let filteredQuestionsCount = questions.length;
 
   apiFeature.pagination(resultPerPage);
 
@@ -39,20 +39,20 @@ exports.getAllInstitutes = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    institutesCount,
+    questionsCount,
     resultPerPage,
-    filteredInstitutesCount,
-    institutes,
+    filteredQuestionsCount,
+    questions,
   });
 });
 
 // Get All Institute (Admin)
-exports.getAdminInstitutes = catchAsyncErrors(async (req, res, next) => {
-  const institutes = await Institute.find();
+exports.getAdminQuestions = catchAsyncErrors(async (req, res, next) => {
+  const questions = await QuestionBank.find();
 
   res.status(200).json({
     success: true,
-    institutes,
+    questions,
   });
 });
 

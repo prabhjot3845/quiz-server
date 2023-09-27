@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  getAllInstitutes,
+  getAllQuestions,
   createQuestionBank,
   updateInstitute,
   deleteInstitute,
@@ -8,7 +8,7 @@ const {
   createInstituteReview,
   instituteReviews,
   deleteReview,
-  getAdminInstitutes,
+  getAdminQuestions,
   createInstituteResult,
   deleteMyResult,
   getInstituteResults,
@@ -26,11 +26,11 @@ const { isAuthenticatedCandidate, authorizeRoles } = require("../middleware/auth
 
 const router = express.Router();
 
-router.route("/institutes").get(getAllInstitutes);
+router.route("/questions").get(getAllQuestions);
 
 router
   .route("/admin/institutes")
-  .get(isAuthenticatedCandidate, getAdminInstitutes);
+  .get(isAuthenticatedCandidate, getAdminQuestions);
 
 router
   .route("/admin/questionBank/new")
