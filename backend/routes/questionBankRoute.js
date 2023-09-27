@@ -2,9 +2,8 @@ const express = require("express");
 const {
   getAllQuestions,
   createQuestionBank,
-  updateInstitute,
+  updateQuestion,
   deleteInstitute,
-  getInstituteDetails,
   createInstituteReview,
   instituteReviews,
   deleteReview,
@@ -29,7 +28,7 @@ const router = express.Router();
 router.route("/questions").get(getAllQuestions);
 
 router
-  .route("/admin/institutes")
+  .route("/admin/questions")
   .get(isAuthenticatedCandidate, getAdminQuestions);
 
 router
@@ -37,11 +36,9 @@ router
   .post(isAuthenticatedCandidate, createQuestionBank);
 
 router
-  .route("/admin/institute/:id")
-  .put(isAuthenticatedCandidate, updateInstitute)
+  .route("/admin/question/:id")
+  .put(isAuthenticatedCandidate, updateQuestion)
   .delete(isAuthenticatedCandidate, authorizeRoles("admin"), deleteInstitute);
-
-router.route("/institute/:id").get(getInstituteDetails);
 
 router.route("/institute/review").put(isAuthenticatedCandidate, createInstituteReview);
 

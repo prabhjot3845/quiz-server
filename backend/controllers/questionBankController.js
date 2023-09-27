@@ -6,7 +6,7 @@ const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 const fs = require('fs');
 
-// Create Institute -- Admin
+// Create QuestionBank -- Admin
 exports.createQuestionBank = catchAsyncErrors(async (req, res, next) => {
 
   req.body.candidate = req.candidate.id;
@@ -20,7 +20,7 @@ exports.createQuestionBank = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product
+// Get All Questions
 exports.getAllQuestions = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 10;
   const questionsCount = await QuestionBank.countDocuments();
@@ -46,7 +46,7 @@ exports.getAllQuestions = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Institute (Admin)
+// Get All Questions (Admin)
 exports.getAdminQuestions = catchAsyncErrors(async (req, res, next) => {
   const questions = await QuestionBank.find();
 
@@ -56,77 +56,30 @@ exports.getAdminQuestions = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get Institute Details
-exports.getInstituteDetails = catchAsyncErrors(async (req, res, next) => {
-  const institute = await Institute.findById(req.params.id);
+// // Get Institute Details
+// exports.getInstituteDetails = catchAsyncErrors(async (req, res, next) => {
+//   const institute = await Institute.findById(req.params.id);
 
-  if (!institute) {
-    return next(new ErrorHander("Institute not found", 404));
-  }
+//   if (!institute) {
+//     return next(new ErrorHander("Institute not found", 404));
+//   }
 
-  res.status(200).json({
-    success: true,
-    institute,
-  });
-});
+//   res.status(200).json({
+//     success: true,
+//     institute,
+//   });
+// });
 
 // Update Institute -- Admin
 
-exports.updateInstitute = catchAsyncErrors(async (req, res, next) => {
-  let institute = await Institute.findById(req.params.instituteId);
+exports.updateQuestion = catchAsyncErrors(async (req, res, next) => {
+  let question = await QuestionBank.findById(req.params.id);
 
-  if (!institute) {
-    return next(new ErrorHander("Institute not found", 404));
+  if (!question) {
+    return next(new ErrorHander("Question not found", 404));
   }
 
-  // // Images Start Here
-  // let images = [];
-
-  // if (typeof req.body.images === "string") {
-  //   images.push(req.body.images);
-  // } else {
-  //   images = req.body.images;
-  // }
-
-  // if (images !== undefined) {
-  //   // Deleting Images From Cloudinary
-  //   for (let i = 0; i < product.images.length; i++) {
-  //     await cloudinary.v2.uploader.destroy(product.images[i].public_id);
-  //   }
-
-  //   const imagesLinks = [];
-
-  //   for (let i = 0; i < images.length; i++) {
-  //     const result = await cloudinary.v2.uploader.upload(images[i], {
-  //       folder: "products",
-  //     });
-
-  //     imagesLinks.push({
-  //       public_id: result.public_id,
-  //       url: result.secure_url,
-  //     });
-  //   }
-
-  //   req.body.images = imagesLinks;
-  // }
-//   await cloudinary.v2.uploader.destroy(institute.avatar.public_id);
-
-//   const avatar = req.files.avatar.tempFilePath;
-
-//   const myCloud = await cloudinary.v2.uploader.upload(avatar);
-//   console.log(myCloud.url)
-  
-
-//   fs.unlink(avatar, (err) => {
-//     if (err) console.log(err);
-//   });
-  
-//   req.body.avatar = {
-//     public_id: myCloud.public_id,
-//     url: myCloud.secure_url,
-//   },
-
-  institute = await Institute.findByIdAndUpdate(req.params.id, req.body, {
+  question = await QuestionBank.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -134,7 +87,7 @@ exports.updateInstitute = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    institute,
+    question,
   });
 });
 
