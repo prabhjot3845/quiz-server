@@ -36,14 +36,14 @@ exports.getQuestion = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Questions
 exports.getAllQuestions = catchAsyncErrors(async (req, res, next) => {
-  // const resultPerPage = 10;
+  const resultPerPage = 10;
   const questionsCount = await QuestionBank.countDocuments();
 
   const apiFeature = new ApiFeatures(QuestionBank.find(), req.query)
     .search()
     .filter();
   
-  // apiFeature.pagination(resultPerPage);
+  apiFeature.pagination(resultPerPage);
   let questions = await apiFeature.query;
 
   let filteredQuestionsCount = questions.length;
