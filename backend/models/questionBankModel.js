@@ -90,7 +90,7 @@ const questionBankSchema = new mongoose.Schema({
   },
   reviews: [
     {
-      user: {
+      candidate: {
         type: mongoose.Schema.ObjectId,
         ref: "Candidate",
         required: true,
@@ -117,11 +117,40 @@ const questionBankSchema = new mongoose.Schema({
       },
     },
   ],
+  reports: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Candidate",
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      comment: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  views: {
+    type: Number,
+    default: 0,
+  },
+  downloads: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  user: {
+  candidate: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Candidate", 
   },
@@ -136,4 +165,3 @@ const questionBankSchema = new mongoose.Schema({
 // });
 
 module.exports = mongoose.model("QuestionBank", questionBankSchema);
-// exports.instituteSchema = instituteSchema;
