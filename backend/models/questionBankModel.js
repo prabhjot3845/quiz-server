@@ -29,25 +29,18 @@ const questionBankSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  options: 
-    {
-      a: {
-        type: String,
-        required: true,
-      },
-      b: {
-        type: String,
-        required: true,
-      },
-      c: {
-        type: String,
-        required: true,
-      },
-      d: {
-        type: String,
-        required: true,
-      },
-    },
+  options: [{
+    type: String,
+    required: true,
+  },],
+  correctAnswer: {
+    type: String,
+    required: true,
+  },
+  marked: {
+    type: String,
+    required: true,
+  },
   previousYear: {
       type: Boolean,
     },
